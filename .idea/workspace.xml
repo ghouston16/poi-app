@@ -16,6 +16,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\ghous\Downloads\donation-web-03\POI\node_modules\prettier" />
   </component>
@@ -40,6 +41,7 @@
       <option name="presentableId" value="Default" />
       <updated>1615500472898</updated>
       <workItem from="1615500474047" duration="2900000" />
+      <workItem from="1615504930553" duration="621000" />
     </task>
     <servers />
   </component>
