@@ -11,11 +11,16 @@ const server = Hapi.server({
   host: "localhost",
 });
 
-server.bind({
-  users: {},
-  currentUser: {},
-  pois: [],
-});
+const dotenv = require('dotenv');
+
+const result = dotenv.config();
+if (result.error) {
+  console.log(result.error.message);
+  process.exit(1);
+}
+
+require('./app/models/db');
+
 
 async function init() {
   await server.register(Inert);
@@ -34,9 +39,9 @@ async function init() {
   });
   server.auth.strategy("session", "cookie", {
     cookie: {
-      name: "poi",
-      password: "password-should-be-32-characters",
-      isSecure: false,
+      name: process.env.cookie_name,
+      password: process.env.cookie_password,
+      isSecure: false
     },
     redirectTo: "/",
   });

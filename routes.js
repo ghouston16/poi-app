@@ -1,7 +1,7 @@
 "use strict";
 
 const Accounts = require("./app/controllers/accounts");
-const Pois = require("./app/controllers/poi");
+const Pois = require("./app/controllers/pois");
 
 module.exports = [
   { method: "GET", path: "/", config: Accounts.index },
