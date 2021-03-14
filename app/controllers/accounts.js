@@ -109,6 +109,7 @@ const Accounts = {
         user.email = userEdit.email;
         user.password = userEdit.password;
         await user.save();
+        console.log(user);
         return h.redirect("/settings");
       } catch (err) {
         return h.view("main", { errors: [{ message: err.message }] });

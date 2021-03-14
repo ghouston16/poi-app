@@ -34,7 +34,47 @@ const Pois = {
         return h.view("main", { errors: [{ message: err.message }] });
       }
     }
-  }
+  },
+  showPoi: {
+    handler: async function(request, h) {
+      try {
+        const id = request.params._id;
+        console.log(id);
+        const poi = await Poi.findById(id).lean();
+        return h.view("poiview", { title: "Edit Poi", poi: poi });
+      } catch (err) {
+        return h.view("report", { errors: [{ message: err.message }] });
+      }
+    }
+  },
+  updatePoi: {
+    handler: async function (request, h) {
+      try {
+        const poiEdit = request.payload;
+        const poi = await Poi.findById(request.params._id);
+        console.log(poi);
+
+       // console.log(id);
+        poi.name = poiEdit.name;
+        poi.description = poiEdit.description;
+        console.log("Updated" + poi);
+        await poi.save();
+       // console.log("Updated" + poi);
+        return h.redirect("/report");
+      } catch (err) {
+        return h.view("main", { errors: [{ message: err.message }] });
+      }
+    },
+  },
+  deletePoi: {
+    handler: async function (request, h) {
+      const poi = Poi.findById(request.params._id);
+      console.log(poi);
+      console.log("Removing POI: " + poi);
+      await poi.remove();
+      return h.redirect("/report");
+    }
+  },
 };
 
 module.exports = Pois;

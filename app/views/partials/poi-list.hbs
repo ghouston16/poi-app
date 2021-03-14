@@ -1,8 +1,5 @@
 <div class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
   <table class="uk-table">
-    <caption>
-      POI's to Date
-    </caption>
     <thead>
       <th>Name</th>
       <th>Description</th>
@@ -14,6 +11,11 @@
           <td>{{name}}</td>
           <td>{{description}}</td>
           <td> {{creator.firstName}} {{creator.lastName}} </td>
+            <td><a href="/poiview/{{_id}}" class="uk-card uk-card-small uk-card-hover uk-padding-small">
+                <i class="fas fa-pen-alt fa-1x" style="color:rgb(156, 70, 128)" title="Update" pos="bottom" uk-tooltip></i>
+            </a></td>
+            <td><i class="far fa-trash-alt fa-2x" title="Delete" pos="bottom" uk-tooltip></i>
+            </td>
         </tr>
       {{/each}}
     </tbody>
