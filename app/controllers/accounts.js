@@ -116,6 +116,16 @@ const Accounts = {
       }
     },
   },
+  deleteAccount: {
+    handler: async function(request, h) {
+      const id = request.auth.credentials.id;
+      const user = await User.findById(id);
+      console.log(id);
+      await User.deleteOne(user);
+      request.cookieAuth.clear();
+      return h.redirect('/');
+    }
+  },
   login: {
     auth: false,
     validate: {

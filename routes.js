@@ -12,13 +12,14 @@ module.exports = [
   { method: "POST", path: "/login", config: Accounts.login },
   { method: 'GET', path: '/settings', config: Accounts.showSettings },
   { method: 'POST', path: '/settings', config: Accounts.updateSettings },
+  { method: 'GET', path: '/deleteUser/{_id}', config: Accounts.deleteAccount },
 
   { method: "GET", path: "/home", config: Pois.home },
   { method: "POST", path: "/create", config: Pois.create },
   { method: "GET", path: "/report", config: Pois.report },
   { method: "GET", path: "/poiview/{_id}", config: Pois.showPoi},
   { method: "POST", path: "/poiview/{_id}", config: Pois.updatePoi },
- // { method: "POST", path: "/report/{_id}", config: Pois.deletePoi },
+  { method: "GET", path: "/delete-poi/{_id}", config: Pois.deletePoi },
   {
     method: "GET",
     path: "/{param*}",

@@ -54,12 +54,12 @@ const Pois = {
         const poi = await Poi.findById(request.params._id);
         console.log(poi);
 
-       // console.log(id);
+        // console.log(id);
         poi.name = poiEdit.name;
         poi.description = poiEdit.description;
         console.log("Updated" + poi);
         await poi.save();
-       // console.log("Updated" + poi);
+        // console.log("Updated" + poi);
         return h.redirect("/report");
       } catch (err) {
         return h.view("main", { errors: [{ message: err.message }] });
@@ -69,12 +69,11 @@ const Pois = {
   deletePoi: {
     handler: async function (request, h) {
       const poi = Poi.findById(request.params._id);
-      console.log(poi);
-      console.log("Removing POI: " + poi);
+      console.log("Removing POI: " + poi.name);
       await poi.remove();
       return h.redirect("/report");
-    }
-  },
+    },
+  }, 
 };
 
 module.exports = Pois;
