@@ -5,6 +5,14 @@ env.config();
 
 const Mongoose = require("mongoose");
 
+async function seed() {
+  var seeder = require('mais-mongoose-seeder')(Mongoose);
+  const data = require('./seed-data.json');
+  const Poi = require('./poi');
+  const User = require('./user');
+  const dbData = await seeder.seed(data, { dropDatabase: false, dropCollections: true });
+  console.log(dbData);
+}
 Mongoose.set("useNewUrlParser", true);
 Mongoose.set("useUnifiedTopology", true);
 
@@ -21,4 +29,5 @@ db.on("disconnected", function() {
 
 db.once("open", function() {
   console.log(`database connected to ${this.name} on ${this.host}`);
+  seed();
 });
