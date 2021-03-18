@@ -2,7 +2,7 @@
 
 const Accounts = require("./app/controllers/accounts");
 const Pois = require("./app/controllers/pois");
-
+const Gallery = require('./app/controllers/gallery');
 module.exports = [
   { method: "GET", path: "/", config: Accounts.index },
   { method: "GET", path: "/signup", config: Accounts.showSignup },
@@ -20,6 +20,9 @@ module.exports = [
   { method: "GET", path: "/poiview/{_id}", config: Pois.showPoi},
   { method: "POST", path: "/poiview/{_id}", config: Pois.updatePoi },
   { method: "GET", path: "/delete-poi/{_id}", config: Pois.deletePoi },
+
+ { method: 'POST', path: '/uploadfile', config: Gallery.uploadFile },
+  //{ method: 'GET', path: '/deleteimage/{id}', config: Gallery.deleteImage },
   {
     method: "GET",
     path: "/{param*}",

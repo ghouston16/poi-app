@@ -20,12 +20,34 @@
       "password": "secret"
     }
   },
+  "categories": {
+    "_model": "Category",
+    "north": {
+      "name": "North"
+    },
+    "east": {
+      "name": "East"
+    },
+    "south": {
+      "name": "South"
+    },
+    "west": {
+      "name": "West"
+    }
+  },
   "pois": {
     "_model": "Poi",
     "one": {
-      "name": "The Island",
-      "description": "paypal",
-      "creator": "->users.homer"
+      "name": "Spike Island",
+      "description": "Island on the South Coast of Ireland, once home to a prison. Known as 'Irelands Alcatraz'.",
+      "creator": "->users.homer",
+      "category": "->categories.south"
+    },
+    "two": {
+      "name": "Craggy Island",
+      "description": "Fictional Island off the West Coast of Ireland, once home to some very famous fictional priests.",
+      "creator": "->users.marge",
+      "category": "->categories.west"
     }
   }
 }

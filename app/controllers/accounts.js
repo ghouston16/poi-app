@@ -3,6 +3,7 @@
 const Boom = require('@hapi/boom');
 const User = require('../models/user');
 const Joi = require("@hapi/joi");
+const Image = require('../models/image')
 
 const Accounts = {
   index: {
