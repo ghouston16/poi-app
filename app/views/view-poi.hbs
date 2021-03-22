@@ -1,0 +1,31 @@
+<div class="uk-flex uk-flex-center uk-flex-middle uk-grid-small" uk-grid>
+    {{> title-card title="POI Tracker" subTitle="View POI"}}
+    {{> main-menu }}
+</div>
+
+<div class="uk-margin uk-width-xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+    <img width="600" height="200" src={{poi.image}}>
+</div>
+
+<div class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+    <table class="uk-table">
+        <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        </thead>
+            <tr>
+                <td>{{poi.name}}</td>
+                <td>{{poi.description}}</td>
+                <td>{{poi.lat}}</td>
+                <td>{{poi.long}}</td>
+                <td><a href="/poiview/{{poi._id}}" class="uk-card uk-card-small uk-card-hover uk-padding-small">
+                    <i class="fas fa-pen-alt fa-1x" style="color:rgb(156, 70, 128)" title="Update" pos="bottom" uk-tooltip></i>
+                </a></td>
+                <td><a href="/delete-poi/{{poi._id}}"><i class="far fa-trash-alt fa-1x" title="Delete" pos="bottom" uk-tooltip></i>
+                </a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

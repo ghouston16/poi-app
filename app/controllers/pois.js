@@ -53,6 +53,7 @@ const Pois = {
         category: Joi.string().required(),
         lat: Joi.string().required(),
         long: Joi.string().required(),
+        image: Joi.string().not().required()
       },
       options: {
         abortEarly: false,
@@ -86,7 +87,8 @@ const Pois = {
           creator: user._id,
           category: category._id,
           lat: data.lat,
-          long: data.long
+          long: data.long,
+          image: data.url
         });
         await newPoi.save();
         return h.redirect("/report");
@@ -113,8 +115,10 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         description: Joi.string().required(),
-        //category: Joi.string().required()
-
+        category: Joi.string().required(),
+        lat: Joi.string().required(),
+        long: Joi.string().required(),
+        image: Joi.string().not().required()
       },
       options: {
         abortEarly: false,
@@ -148,7 +152,10 @@ const Pois = {
         console.log(poi);
         poi.name = poiEdit.name;
         poi.description = poiEdit.description;
-        poi.category =  poiEdit.category,
+        poi.category =  poiEdit.category;
+        poi.lat = poiEdit.lat;
+        poi.long = poiEdit.long;
+        poi.image = poiEdit.image;
         console.log("Updated" + poi);
         await poi.save();
         // console.log("Updated" + poi);
@@ -165,6 +172,20 @@ const Pois = {
       await poi.remove();
       return h.redirect("/report");
     },
+  },
+  viewPoi: {
+    handler: async function(request, h) {
+      try {
+        const categories = await Category.find().lean();
+        const id = request.params._id;
+        console.log(id);
+        const poi = await Poi.findById(id).lean();
+       // const poicategory = poi.category.name;
+        return h.view("view-poi", { title: "Poi View", poi: poi , categories: categories});
+      } catch (err) {
+        return h.view("report", { errors: [{ message: err.message }] });
+      }
+    }
   },
   /*
   showUpload: {

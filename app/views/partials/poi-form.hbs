@@ -19,11 +19,15 @@
             <input class="uk-input uk-form-large" type="text" name="long" value="{{poi.long}}">
         </div>
         <div class="uk-inline uk-width-1-1">
+            <span class="uk-form-icon" uk-icon="icon: location"></span>
+            <input class="uk-input uk-form-large" type="text" name="image" value="{{poi.image}}">
+        </div>
+        <div class="uk-inline uk-width-1-1">
                 <div class="uk-form-label">Select Category</div>
                 <div class="uk-form-controls ">
                     {{#each categories }}
                         <label>
-                            <input class="uk-radio" type="radio" name="category" value="{{name}}" />
+                            <input class="uk-radio" type="radio" name="category" value="{{_id}}" />
                             {{name}}</label
                         >
                         <br />
