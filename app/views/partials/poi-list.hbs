@@ -5,6 +5,8 @@
         <th>Description</th>
         <th>Creator</th>
         <th>Category</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
         </thead>
         <tbody class="uk-text-left">
         {{#each pois}}
@@ -13,6 +15,8 @@
                 <td>{{description}}</td>
                 <td> {{creator.firstName}} {{creator.lastName}} </td>
                 <td>{{category.name}}</td>
+                <td>{{lat}}</td>
+                <td>{{long}}</td>
                     <td><a href="/poiview/{{_id}}" class="uk-card uk-card-small uk-card-hover uk-padding-small">
                         <i class="fas fa-pen-alt fa-1x" style="color:rgb(156, 70, 128)" title="Update" pos="bottom" uk-tooltip></i>
                     </a></td>

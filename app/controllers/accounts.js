@@ -53,10 +53,11 @@ const Accounts = {
           lastName: payload.lastName,
           email: payload.email,
           password: payload.password,
+          isAdmin: false
         });
         user = await newUser.save();
         request.cookieAuth.set({ id: user.id });
-        return h.redirect("/home");
+        return h.redirect("/report");
       } catch (err) {
         return h.view("signup", { errors: [{ message: err.message }] });
       }

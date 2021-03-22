@@ -32,9 +32,10 @@ const ImageStore = {
       console.log("* " + image.public_id);
       console.log("* " + image.url);
       const url = image.url;
+
       const newImage = new Image({
         url: url,
-     //   poi: poi,
+      //  poi: Poi.,
       });
       await newImage.save();
       // ("pizza", err, image);

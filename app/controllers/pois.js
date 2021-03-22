@@ -7,7 +7,7 @@ const Boom = require('@hapi/boom');
 const ImageStore = require('../utils/image-store');
 const Gallery = require('../utils/image-store')
 const Category = require("../models/category");
-
+const  AdminStats = require('../utils/adminStats.js');
 const Pois = {
   home: {
     handler: async function (request, h) {
@@ -17,13 +17,32 @@ const Pois = {
   },
   report: {
     handler: async function (request, h) {
-    //  const pois = await Poi.find().populate("creator").lean();
-      const categories = await Category.find().lean();
-      const pois = await Poi.find().populate("creator").populate("category").lean();
-      return h.view("report", {
-        title: "Points of Interest",
-        pois: pois,
-      });
+      const id = request.auth.credentials.id;
+      const user = await User.findById(id);
+      console.log(user);
+      if (user.isAdmin === true) {
+        //  const pois = await Poi.find().populate("creator").lean();
+        const categories = await Category.find().lean();
+        const pois = await Poi.find().populate("creator").populate("category").lean();
+        const userTotal = await AdminStats.countUsers();
+        console.log(userTotal);
+        const poiTotal = await AdminStats.countIslands();
+        return h.view("report", {
+          title: "Admin Dash",
+          pois: pois,
+          userTotal: userTotal,
+          poiTotal: poiTotal
+        });
+      } else {
+        //  const pois = await Poi.find().populate("creator").lean();
+        const categories = await Category.find().lean();
+        const pois = await Poi.find({ creator: id }).populate("creator").populate("category").lean();
+        return h.view("report", {
+          title: "Points of Interest",
+          pois: pois,
+        });
+
+      }
     },
   },
   create: {
@@ -31,7 +50,9 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         description: Joi.string().required(),
-        category: Joi.string().required()
+        category: Joi.string().required(),
+        lat: Joi.string().required(),
+        long: Joi.string().required(),
       },
       options: {
         abortEarly: false,
@@ -50,7 +71,7 @@ const Pois = {
     },
     handler: async function(request, h) {
       try {
-       // const image = ImageStore.uploadImage(imagefile)
+       // const image = ImageStore.uploadImage(imagefile);
         const categories = await Category.find().lean();
         const id = request.auth.credentials.id;
         const user = await User.findById(id);
@@ -64,6 +85,8 @@ const Pois = {
           description: data.description,
           creator: user._id,
           category: category._id,
+          lat: data.lat,
+          long: data.long
         });
         await newPoi.save();
         return h.redirect("/report");

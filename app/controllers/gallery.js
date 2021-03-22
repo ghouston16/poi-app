@@ -27,6 +27,7 @@ const Gallery = {
      //   console.log(poi);
         if (Object.keys(file).length > 0) {
           await ImageStore.uploadImage(request.payload.imagefile);
+        //  await image.url;
           return h.redirect('/report');
         }
         return h.view('gallery', {
