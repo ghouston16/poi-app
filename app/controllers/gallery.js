@@ -1,6 +1,6 @@
 'use strict';
 
-const ImageStore = require('../utils/image-store');
+//const ImageStore = require('../utils/image-store');
 const Image = require('../models/image');
 const Poi = require("../models/poi");
 
