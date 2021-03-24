@@ -2,8 +2,8 @@
 
 const Accounts = require("./app/controllers/accounts");
 const Pois = require("./app/controllers/pois");
-const Gallery = require('./app/controllers/gallery');
-const Categories = require('./app/controllers/categories')
+//const Gallery = require('./app/controllers/gallery');
+//const Categories = require('./app/controllers/categories')
 module.exports = [
   { method: "GET", path: "/", config: Accounts.index },
   { method: "GET", path: "/signup", config: Accounts.showSignup },
@@ -23,11 +23,11 @@ module.exports = [
   { method: "GET", path: "/delete-poi/{_id}", config: Pois.deletePoi },
   { method: "GET", path: "/view-poi/{_id}", config: Pois.viewPoi },
 
-  { method: 'POST', path: '/uploadfile', config: Gallery.uploadFile },
+  //{ method: 'POST', path: '/uploadfile', config: Gallery.uploadFile },
 
-  { method: "GET", path: "/categories", config: Categories.categories },
-  { method: 'POST', path: '/addCategory', config: Categories.addCategory },
-  { method: 'POST', path: '/editCategory/{id}', config: Categories.editCategory },
+ // { method: "GET", path: "/categories", config: Categories.categories },
+  //{ method: 'POST', path: '/addCategory', config: Categories.addCategory },
+ // { method: 'POST', path: '/editCategory/{id}', config: Categories.editCategory },
 
   //{ method: 'GET', path: '/deleteimage/{id}', config: Gallery.deleteImage },
   {
