@@ -1,13 +1,13 @@
 "use strict";
 
-const ImageStore = require('./app/utils/image-store');
+//const ImageStore = require('./app/utils/image-store');
 const Hapi = require("@hapi/hapi");
 const Inert = require("@hapi/inert");
 const Vision = require("@hapi/vision");
 const Handlebars = require("handlebars");
 const Cookie = require("@hapi/cookie");
 const Joi = require("@hapi/joi");
-const cloudinary = require("cloudinary")
+//const cloudinary = require("cloudinary")
 
 const server = Hapi.server({
   port: process.env.PORT || 3000
