@@ -16,6 +16,10 @@ const AdminStats = {
     const count = await User.countDocuments();
     return count;
   },
+  countCategories: async function() {
+    const count = await Category.countDocuments();
+    return count;
+  }
   };
 
 module.exports = AdminStats;

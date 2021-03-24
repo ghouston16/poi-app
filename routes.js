@@ -25,8 +25,10 @@ module.exports = [
 
   { method: 'POST', path: '/uploadfile', config: Gallery.uploadFile },
 
- // { method: "GET", path: "/categories", config: Categories.categories },
-  //{ method: 'POST', path: '/addCategory', config: Categories.addCategory },
+  { method: "GET", path: "/categories", config: Categories.categories },
+  { method: "GET", path: "/category-view/{_id}", config: Categories.showCategory },
+  { method: 'POST', path: '/add-cat', config: Categories.addCategory },
+  { method: "GET", path: "/delete-category/{_id}", config: Categories.deleteCat },
  // { method: 'POST', path: '/editCategory/{id}', config: Categories.editCategory },
 
   //{ method: 'GET', path: '/deleteimage/{id}', config: Gallery.deleteImage },

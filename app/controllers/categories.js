@@ -11,29 +11,57 @@ const Categories = {
       const id = request.auth.credentials.id;
       const user = await User.findById(id);
       console.log(user);
-      if (user.isAdmin === true) {
+     // if (user.isAdmin === true) {
         //  const pois = await Poi.find().populate("creator").lean();
-        const categories = await Category.find().populate("name").lean();
+        const categories = await Category.find().populate().lean();
         const userTotal = await AdminStats.countUsers();
-        console.log(userTotal);
+        const totalCats = await AdminStats.countCategories();
+      //  console.log(userTotal);
         const poiTotal = await AdminStats.countIslands();
         return h.view("categories", {
           title: "Categories",
           categories: categories,
           userTotal: userTotal,
-          poiTotal: poiTotal
+          poiTotal: poiTotal,
+          totalCategories: totalCats
         });
-      } else {
-        //  const pois = await Poi.find().populate("creator").lean();
-        const categories = await Category.find().lean();
-        const pois = await Poi.find({ creator: id }).populate("creator").populate("category").lean();
-        return h.view("report", {
-          title: "Points of Interest",
-          pois: pois,
-        });
-
+      } /* else {
+          //  const pois = await Poi.find().populate("creator").lean();
+          const categories = await Category.find({ }).populate().lean();
+         // const userTotal = await AdminStats.countUsers();
+         // const totalCats = await
+         //   console.log(userTotal);
+          const poiTotal = await AdminStats.countIslands();
+          return h.view("categories", {
+            title: "Categories",
+            categories: categories,
+          //  userTotal: userTotal,
+          //  poiTotal: poiTotal,
+         //   totalCategories: totalCats
+          });
+        }
+    }, */
+  },
+  showCategory: {
+    handler: async function(request, h) {
+      try {
+        const id = request.auth.credentials.id;
+        const user = User.findById(id);
+        const category = await Category.findById(request.params._id);
+        const catId = category._id;
+        console.log(id);
+        const users = await User.find().lean();
+        if (user.isAdmin === true) {
+          const pois = await Poi.find({ creator: id, category: catId }).populate("creator").populate("category").lean();
+          return h.view("category-view", { title: "POI Category", pois: pois });
+        } else {
+          const pois = await Poi.find({ category: catId }).populate("creator").populate("category").lean();
+          return h.view("category-view", { title: "POI Category", pois: pois });
+        }
+      } catch (err) {
+        return h.view("report", { errors: [{ message: err.message }] });
       }
-    },
+    }
   },
   addCategory: {
     handler: async function(request, h) {
@@ -44,9 +72,21 @@ const Categories = {
       await newCategory.save();
       const categories = Category.find();
       const users = User.find();
-      return h.redirect('/userDash', {
-        title: 'Dashboard',
+      return h.redirect('/categories', {
+        title: 'Categories',
         users: users,
+        categories: categories,
+      });
+    }
+  },
+  deleteCat: {
+    handler: async function(request, h) {
+      const category = Category.findById(request.params._id);
+      await Category.deleteOne(category);
+      const categories = Category.find();
+      const users = User.find();
+      return h.redirect('/categories', {
+        title: 'Categories',
         categories: categories,
       });
     }

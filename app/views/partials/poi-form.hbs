@@ -23,19 +23,22 @@
             <input class="uk-input uk-form-large" type="text" name="image" value="{{poi.image}}">
         </div>
         <div class="uk-inline uk-width-1-1">
-                <div class="uk-form-label">Select Category</div>
-                <div class="uk-form-controls ">
-                    {{#each categories }}
-                        <label>
-                            <input class="uk-radio" type="radio" name="category" value="{{_id}}" />
-                            {{name}}</label
-                        >
-                        <br />
-                    {{/each}}
-                </div>
-            </div>
-            <div class="uk-margin">
-                <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Update</button>
+            <div class="uk-form-label">Select Category</div>
+            <div class="uk-form-controls ">
+                {{#each categories }}
+                    <label>
+                        <input class="uk-radio" type="radio" name="category" value="{{_id}}" />
+                        {{name}}</label
+                    >
+                    <br />
+                {{/each}}
             </div>
         </div>
+        <div class="uk-margin">
+            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Update</button>
+        </div>
+    </div>
 </form>
+<div class="uk-margin"><a href="/delete-poi/{{poi._id}}">
+    <button class="uk-button uk-button-danger uk-button-large uk-width-1-1">Delete POI</button>
+</a></div>

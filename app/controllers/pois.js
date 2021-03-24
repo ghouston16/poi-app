@@ -28,7 +28,7 @@ const Pois = {
         console.log(userTotal);
         const poiTotal = await AdminStats.countIslands();
         return h.view("report", {
-          title: "Admin Dash",
+          title: "Admin POI's",
           pois: pois,
           userTotal: userTotal,
           poiTotal: poiTotal
@@ -115,7 +115,7 @@ const Pois = {
       payload: {
         name: Joi.string().required(),
         description: Joi.string().required(),
-        category: Joi.string().required(),
+        category: Joi.string().not().required(),
         lat: Joi.string().required(),
         long: Joi.string().required(),
         image: Joi.string().not().required()
@@ -127,13 +127,13 @@ const Pois = {
         const id = request.params._id;
         console.log(id);
         const poi = await Poi.findById(id).lean();
-       // const categories = await Category.find().populate("name").lean();
+       const categories = await Category.find().lean();
         return h
           .view("poiview", {
             title: "Error",
             errors: error.details,
             poi: poi,
-           // categories: categories,
+            categories: categories,
           })
           .takeover()
           .code(400);
@@ -143,12 +143,10 @@ const Pois = {
       try {
         const poiEdit = request.payload;
         const poi = await Poi.findById(request.params._id);
-       /* const rawCategory = request.payload.category;
+        const rawCategory = request.payload.category;
         const category = await Category.findOne({
           name: rawCategory
         });
-
-        */
         console.log(poi);
         poi.name = poiEdit.name;
         poi.description = poiEdit.description;
@@ -169,7 +167,7 @@ const Pois = {
     handler: async function (request, h) {
       const poi = Poi.findById(request.params._id);
       console.log("Removing POI: " + poi.name);
-      await poi.remove();
+      await Poi.deleteOne(poi);
       return h.redirect("/report");
     },
   },

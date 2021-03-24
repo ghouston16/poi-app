@@ -1,0 +1,17 @@
+<div class="uk-width-expand@m">
+    <div class="uk-card uk-card-default uk-width-xlarge uk-card-body uk-box-shadow-large">
+        <h3 class="uk-card-title uk-text-center"> Add Category</h3>
+        <form class="uk-form-stacked uk-text-left" action="/add-cat"  method="POST">
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon" uk-icon="icon: location"></span>
+                    <input class="uk-input uk-form-large" type="text" name="name" placeholder="Category Name">
+                </div>
+            </div>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Create</button>
+                </div>
+        </form>
+    </div>
+</div>
+{{> error}}
