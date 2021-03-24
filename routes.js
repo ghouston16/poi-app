@@ -29,7 +29,8 @@ module.exports = [
   { method: "GET", path: "/category-view/{_id}", config: Categories.showCategory },
   { method: 'POST', path: '/add-cat', config: Categories.addCategory },
   { method: "GET", path: "/delete-category/{_id}", config: Categories.deleteCat },
- // { method: 'POST', path: '/editCategory/{id}', config: Categories.editCategory },
+  { method: 'GET', path: '/update-category/{_id}', config: Categories.showCat },
+  { method: 'POST', path: '/update-category/{_id}', config: Categories.editCategory },
 
   //{ method: 'GET', path: '/deleteimage/{id}', config: Gallery.deleteImage },
   {

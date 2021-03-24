@@ -63,6 +63,18 @@ const Categories = {
       }
     }
   },
+  showCat: {
+    handler: async function(request, h) {
+      try {
+        const category = await Category.findById(request.params._id).lean();
+        const catName = category.name;
+        const users = await User.find().lean();
+          return h.view("update-category", { title: "Edit Category", category: category });
+      } catch (err) {
+        return h.view("report", { errors: [{ message: err.message }] });
+      }
+    }
+  },
   addCategory: {
     handler: async function(request, h) {
       const payload = request.payload;
@@ -94,14 +106,14 @@ const Categories = {
   editCategory: {
     handler: async function(request, h) {
       const newDetails = request.payload;
-      const id = request.params.id;
-      const updatedCategory = await Category.findById(id);
-      updatedCategory.name = newDetails.name;
-      await updatedCategory.save();
+      const id = request.params._id;
+      const category = await Category.findById(id);
+      category.name = newDetails.name;
+      await category.save();
       const categories = Category.find();
       const users = User.find();
-      return h.redirect('/userDash', {
-        title: 'Dashboard',
+      return h.redirect('/categories', {
+        title: 'Categories',
         users: users,
         categories: categories,
       });
