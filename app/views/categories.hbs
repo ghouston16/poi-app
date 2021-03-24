@@ -1,0 +1,27 @@
+<div class="uk-flex uk-flex-center uk-flex-middle uk-grid-small" uk-grid>
+    {{> title-card title="POI Tracker" subTitle="Points of Interest so Far" }}
+    {{> main-menu }}
+</div>
+<div>{{adminStats}}</div>
+<div class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+    <table class="uk-table">
+        <thead>
+        <th>Category</th>
+        </thead>
+        <tbody class="uk-text-left">
+        {{#each categories}}
+            <tr>
+                <td>{{name}}</td>
+                <td><a href="/poiview/{{_id}}" class="uk-card uk-card-small uk-card-hover uk-padding-small">
+                    <i class="fas fa-pen-alt fa-1x" style="color:rgb(156, 70, 128)" title="Update" pos="bottom" uk-tooltip></i>
+                </a></td>
+                <td><a href="/delete-poi/{{_id}}"><i class="far fa-trash-alt fa-1x" title="Delete" pos="bottom" uk-tooltip></i>
+                </a></td>
+                <td><a href="/view-poi/{{_id}}"><i class= "fas fa-list fa-1x" title="View" pos="bottom" uk-tooltip></i>
+                </a></td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
+{{> error}}

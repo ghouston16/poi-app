@@ -1,0 +1,35 @@
+<div class="uk-container">
+    <div class="uk-flex uk-flex-center uk-flex-middle uk-margin">
+        <div class="uk-width-2-3@m uk-card-primary uk-card-default uk-padding-small uk-text-center">
+            <div class="title"> Latest Weather </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2@m uk-card uk-card-default uk-padding">
+        <fieldset class="uk-fieldset">
+            <legend class="uk-legend">Get Current Weather</legend>
+            <div class="uk-margin">
+                <input id="location-id" class="uk-input" type="text" value="{{poi.name}}">
+            </div>
+        </fieldset>
+        <button onClick="fetchWeather()" id="getweather-btn" class="uk-button uk-button-default">Get Weather</button>
+    </div>
+    <table id="weather-table" class="uk-table uk-table-divider">
+        <caption> Weather Report :</caption>
+        <thead>
+        <tr>
+            <th>Feels Like</th>
+            <th>Clouds</th>
+            <th>Wind Speed</th>
+            <th>Wind Direction</th>
+            <th>Visibility</th>
+            <th>Humidity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr></tr>
+        </tbody>
+    </table>
+</div>
+<script src="weather-web.js" type="text/javascript"></script>
+</body>
+</html>
