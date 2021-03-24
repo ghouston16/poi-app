@@ -3,8 +3,10 @@
 const Boom = require('@hapi/boom');
 const User = require('../models/user');
 const Joi = require("@hapi/joi");
-const Image = require('../models/image')
-
+const Image = require('../models/image');
+const AdminStats = require('../utils/adminStats');
+const Category = require('../models/category');
+const Poi = require('../models/poi');
 const Accounts = {
   index: {
     auth: false,
@@ -173,6 +175,35 @@ const Accounts = {
       return h.redirect("/");
     },
   },
-};
+ /* userlist: {
+    handler: async function(request, h) {
+      const id = request.auth.credentials.id;
+      const user = await User.findById(id);
+      console.log(user);
+      if (user.isAdmin === true) {
+        //  const pois = await Poi.find().populate("creator").lean();
+        // const categories = await Category.find().lean();
+        const users = await User.find().populate("firstName").populate("lastName").populate("email").lean();
+        const userTotal = await AdminStats.countUsers();
+        console.log(userTotal);
+        const poiTotal = await AdminStats.countIslands();
+        const totalCats = await AdminStats.countCategories();
+        return h.view("report", {
+          title: "Admin POI's",
+          userTotal: userTotal,
+          poiTotal: poiTotal,
+          users: users
+        });
+      } else {
+        //  const pois = await Poi.find().populate("creator").lean();
+        return h.view("home", {
+          title: "Points of Interest",
+        });
 
-module.exports = Accounts;
+      }
+    },
+  }
+
+  */
+  };
+  module.exports = Accounts;

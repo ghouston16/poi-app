@@ -27,11 +27,14 @@ const Pois = {
         const userTotal = await AdminStats.countUsers();
         console.log(userTotal);
         const poiTotal = await AdminStats.countIslands();
+        const totalCats = await AdminStats.countCategories();
         return h.view("report", {
           title: "Admin POI's",
           pois: pois,
           userTotal: userTotal,
-          poiTotal: poiTotal
+          poiTotal: poiTotal,
+          isAdmin: user.isAdmin,
+          totalCats: totalCats,
         });
       } else {
         //  const pois = await Poi.find().populate("creator").lean();

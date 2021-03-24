@@ -23,7 +23,7 @@ const Categories = {
           categories: categories,
           userTotal: userTotal,
           poiTotal: poiTotal,
-          totalCategories: totalCats
+          totalCats: totalCats
         });
       } /* else {
           //  const pois = await Poi.find().populate("creator").lean();
