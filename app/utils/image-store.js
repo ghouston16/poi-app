@@ -49,4 +49,4 @@ const ImageStore = {
 
  */
 
-module.exports = ImageStore;
+//module.exports = ImageStore;
