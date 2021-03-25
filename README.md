@@ -33,4 +33,4 @@ run npm install to install package dependencies:
     "prettier": "^2.2.1"
   }
   
-  Run index.js in IDE to start app
+  Run index.js in IDE 
