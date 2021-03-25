@@ -7,6 +7,7 @@ const Image = require('../models/image');
 const AdminStats = require('../utils/adminStats');
 const Category = require('../models/category');
 const Poi = require('../models/poi');
+
 const Accounts = {
   index: {
     auth: false,
