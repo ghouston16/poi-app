@@ -1,0 +1,81 @@
+{
+  "poiService": "http://localhost:3000",
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret",
+      "isAdmin": false
+    },
+    {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret",
+      "isAdmin": true
+    }
+  ],
+  "newUser":
+  {
+    "firstName": "Bart",
+    "lastName": "Simpson",
+    "email": "bart@simpson.com",
+    "password": "secret"
+  },
+  "categories": [
+    {
+      "name": "North"
+    },
+    {
+      "name": "East"
+    },
+    {
+      "name": "South"
+    },
+    {
+      "name": "West"
+    }
+  ],
+  "newCategory":
+  {
+    "name": "South-East"
+  },
+  "pois": [
+   {
+      "name": "Spike Island",
+      "description": "Island on the South Coast of Ireland, once home to a prison. Known as 'Irelands Alcatraz'.",
+      "creator": "->users.homer",
+      "category": "->categories.south",
+      "lat": "51.8345° N",
+      "long": "8.2862° W",
+      "image": "https://res.cloudinary.com/dbx7nenkt/image/upload/v1616449032/spikeisland1_xtqhma.jpg"
+    },
+    {
+      "name": "Craggy Island",
+      "description": "Fictional Island off the West Coast of Ireland, once home to some very famous fictional priests.",
+      "creator": "->users.marge",
+      "category": "->categories.west"
+    },
+    {
+      "name": "Inis Mor",
+      "description": "Inis Mór is the largest of the three Aran Islands (7,635 acres) and includes several ancient stone forts and churches among its antiquities. Most impressive of the stone forts is Dun Aengus. It is semicircular, resting on the edge of a perpendicular cliff rising 100 metres out of the ocean. The fort consists of an inner court 50 metres across surrounded by a wall six metres high and five metres thick at the base. Outside is a rampart, a defence formed by sharp-pointed stones set closely together. Dun Aengus superb position and it’s structural perfection, have prompted many experts to pronounce it one of the finest prehistoric monuments in Europe. There are about 1100 inhabitants on Inis Mor making it by far the most populated of the islands. The main village on the island is Kilronan, which has a quite large new harbour that accommodates a vast amount of tourist travel to the island. The best way to see Inis Mor is to hire a bike or take a Pony & Trap. You can also go bus tour which is also recommended as well as to try Glamping.",
+      "creator": "->users.bart",
+      "category": "->categories.west",
+      "lat": "53.1289° N",
+      "long": "9.7197° W",
+      "image": "https://res.cloudinary.com/dbx7nenkt/image/upload/v1616449125/inismor1_n7chzk.jpg"
+    }
+  ],
+  "newPoi":
+  {
+    "name": "Howth",
+    "description":  "Tombolo on the East Coast of Ireland. Home to Howth Head LightHouse",
+    "creator": "->users.bart",
+    "category": "->categories.east",
+    "lat": "53.3786° N",
+    "long": "6.0570° W",
+    "image": "https://res.cloudinary.com/dbx7nenkt/image/upload/v1616454395/howth1_hktnjn.jpg"
+  }
+
+}

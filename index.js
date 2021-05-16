@@ -51,7 +51,8 @@ async function init() {
     redirectTo: "/",
   });
   server.auth.default("session");
-  server.route(require("./routes"));
+  server.route(require('./routes'));
+  server.route(require('./routes-api'));
   await server.start();
   console.log(`Server running at: ${server.info.uri}`);
 }
