@@ -1,12 +1,31 @@
 
+### Description:
+A node.js based point-of-interest tracker application. Allows users to create POI's and store images, location data and a description of the
+location. users can also create categories and add POI's to these categories. I chose to focus on islands on the Irish coast, however the UI can
+be tweaked to accomodate an type of POI.
+
+### Functionality:
+
+* Signup & Login
+    * New members can register for an account
+    * They can log in and view their personalised dashboard
+    
+* Manage Points-of-Interest 
+    * create, update, delete POI's
+    
+* Manage Categories
+    * create, update, delete categories.
+    
+* Manage accounts
+    * Admin accounts can delete/edit any user account
+    * User can update/delete own account     
+
 ### Installation:
-
-- Download [node](https://nodejs.org/en/download/) for your operating system
-- Create `.env` file in root project directory and add the following properties.
-
-db=<mongoDB database>
-cookie_name=<poi-web>
-cookie_password=<secretpasswordnotrevealedtoanyone>
+* Download [node](https://nodejs.org/en/download/) for your operating system
+* Create `.env` file in root project directory and add the following properties.
+    * db=<mongoDB database>
+    * cookie_name=<poi-web>
+    * cookie_password=<secretpasswordnotrevealedtoanyone>
 
 ### Dependencies:
 
@@ -33,4 +52,7 @@ run npm install to install package dependencies:
     "prettier": "^2.2.1"
   }
   
-  Run index.js in IDE 
+ ### Running Application
+  * Run index.js in IDE 
+  * Create an account on https://glitch.com and import this repo: https://github.com/ghouston16/poi-app/
+ 
