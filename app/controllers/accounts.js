@@ -7,6 +7,8 @@ const Image = require('../models/image');
 const AdminStats = require('../utils/adminStats');
 const Category = require('../models/category');
 const Poi = require('../models/poi');
+const bcrypt = require("bcrypt");          // ADDED
+const saltRounds = 10;                     // ADDED
 
 const Accounts = {
   index: {
@@ -25,10 +27,10 @@ const Accounts = {
     auth: false,
     validate: {
       payload: {
-        firstName: Joi.string().required(),
-        lastName: Joi.string().required(),
+        firstName: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
+        lastName: Joi.string().required().regex(/^[A-Z]/).min(3),
         email: Joi.string().email().required(),
-        password: Joi.string().required(),
+        password: Joi.string().required().min(5),
       },
       options: {
         abortEarly: false,
@@ -51,11 +53,12 @@ const Accounts = {
           const message = "Email address is already registered";
           throw Boom.badData(message);
         }
+        const hash = await bcrypt.hash(payload.password, saltRounds);
         const newUser = new User({
           firstName: payload.firstName,
           lastName: payload.lastName,
           email: payload.email,
-          password: payload.password,
+          password: hash,
           isAdmin: false
         });
         user = await newUser.save();
@@ -86,10 +89,10 @@ const Accounts = {
   updateSettings: {
     validate: {
       payload: {
-        firstName: Joi.string().required(),
-        lastName: Joi.string().required(),
+        firstName: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
+        lastName: Joi.string().required().regex(/^[A-Z]/).min(3),
         email: Joi.string().email().required(),
-        password: Joi.string().required(),
+        password: Joi.string().required().min(5),
       },
       options: {
         abortEarly: false,
@@ -111,8 +114,8 @@ const Accounts = {
         const user = await User.findById(id);
         user.firstName = userEdit.firstName;
         user.lastName = userEdit.lastName;
-        user.email = userEdit.email;
-        user.password = userEdit.password;
+        const hash = await bcrypt.hash(userEdit.password, saltRounds);    // ADDED
+        user.password = hash;          // CHANGED
         await user.save();
         console.log(user);
         return h.redirect("/settings");
@@ -136,7 +139,7 @@ const Accounts = {
     validate: {
       payload: {
         email: Joi.string().email().required(),
-        password: Joi.string().required(),
+        password: Joi.string().required().min(5),
       },
       options: {
         abortEarly: false,
@@ -159,7 +162,7 @@ const Accounts = {
           const message = "Email address is not registered";
           throw Boom.unauthorized(message);
         }
-        user.comparePassword(password);
+        await user.comparePassword(password);
         request.cookieAuth.set({ id: user.id });
         if (user.isAdmin === true){
           return h.redirect("/report")
