@@ -156,7 +156,7 @@ const Pois = {
         poi.category =  poiEdit.category;
         poi.lat = poiEdit.lat;
         poi.long = poiEdit.long;
-        poi.image = poiEdit.image;
+        poi.images = poiEdit.image;
         console.log("Updated" + poi);
         await poi.save();
         // console.log("Updated" + poi);

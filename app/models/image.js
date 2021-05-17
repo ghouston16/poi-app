@@ -5,11 +5,10 @@ const Schema = Mongoose.Schema;
 
 const imageSchema = new Schema({
   url: String,
- /* poi: {
+  poi: {
     type: Schema.Types.ObjectId,
     ref: 'Poi',
   },
-  */
 });
 
 module.exports = Mongoose.model("Image", imageSchema)

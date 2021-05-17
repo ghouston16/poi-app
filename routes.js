@@ -23,7 +23,9 @@ module.exports = [
   { method: "GET", path: "/delete-poi/{_id}", config: Pois.deletePoi },
   { method: "GET", path: "/view-poi/{_id}", config: Pois.viewPoi },
 
-  { method: 'POST', path: '/uploadfilez', config: Gallery.uploadFile },
+  { method: 'GET', path: '/gallery/{_id}', config: Gallery.index },
+  { method: 'POST', path: '/uploadfile/{_id}', config: Gallery.uploadFile },
+  { method: 'GET', path: '/deleteimage/{id}', config: Gallery.deleteImage },
 
   { method: "GET", path: "/categories", config: Categories.categories },
   { method: "GET", path: "/category-view/{_id}", config: Categories.showCategory },

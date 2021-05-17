@@ -16,7 +16,8 @@ const poiSchema = new Schema({
   },
   image: String,
   lat: String,
-  long: String
+  long: String,
+  images: Array,
 });
 
 module.exports = Mongoose.model("Poi", poiSchema);
