@@ -4,6 +4,7 @@ const ImageStore = require('../utils/image-store');
 const Image = require('../models/image');
 const Poi = require("../models/poi");
 
+
 const Gallery = {
   index: {
     handler: async function(request, h) {
@@ -49,7 +50,7 @@ const Gallery = {
           poi.long = poi.long;
           poi.images = Images;
           poi.save();
-          return h.redirect('/report');
+          return h.redirect('/gallery/' + poi._id);
         }
         return h.view('gallery', {
           title: 'Cloudinary Gallery',

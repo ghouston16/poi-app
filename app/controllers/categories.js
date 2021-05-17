@@ -47,6 +47,7 @@ const Categories = {
       try {
         const id = request.auth.credentials.id;
         const user = User.findById(id);
+        const categories = await Category.find().lean();
         const category = await Category.findById(request.params._id);
         const catId = category._id;
         console.log(id);
@@ -56,7 +57,7 @@ const Categories = {
           return h.view("category-view", { title: "POI Category", pois: pois });
         } else {
           const pois = await Poi.find({ category: catId }).populate("creator").populate("category").lean();
-          return h.view("category-view", { title: "POI Category", pois: pois });
+          return h.view("category-view", { title: "POI Category", pois: pois, categories: categories });
         }
       } catch (err) {
         return h.view("report", { errors: [{ message: err.message }] });

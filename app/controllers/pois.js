@@ -56,7 +56,7 @@ const Pois = {
         category: Joi.string().required(),
         lat: Joi.string().required(),
         long: Joi.string().required(),
-        image: Joi.string().not().required()
+        //image: Joi.string().not().required(),
       },
       options: {
         abortEarly: false,

@@ -25,7 +25,7 @@ module.exports = [
 
   { method: 'GET', path: '/gallery/{_id}', config: Gallery.index },
   { method: 'POST', path: '/uploadfile/{_id}', config: Gallery.uploadFile },
-  { method: 'GET', path: '/deleteimage/{id}', config: Gallery.deleteImage },
+  { method: 'GET', path: '/deleteimage/{_id}', config: Gallery.deleteImage },
 
   { method: "GET", path: "/categories", config: Categories.categories },
   { method: "GET", path: "/category-view/{_id}", config: Categories.showCategory },

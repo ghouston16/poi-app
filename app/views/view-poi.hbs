@@ -21,27 +21,21 @@
                 <td><a href="/poiview/{{poi._id}}" class="uk-card uk-card-small uk-card-hover uk-padding-small">
                     <i class="fas fa-pen-alt fa-1x" style="color:rgb(198,24,203)" title="Update" pos="bottom" uk-tooltip></i>
                 </a></td>
+                <td><a href="/gallery/{{poi._id}}" class="uk-card uk-card-small uk-card-hover uk-padding-small">
+                    <i class="fas fa-image fa-1x" style="color:rgb(12,19,205)" title="Gallery" pos="bottom" uk-tooltip></i>
+                </a></td>
                 <td><a href="/delete-poi/{{poi._id}}"><i class="far fa-trash-alt fa-1x" style="color:rgb(234,10,55)" title="Delete" pos="bottom" uk-tooltip></i>
                 </a></td>
             </tr>
         </tbody>
     </table>
 </div>
-    <div class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
-        <form class="uk-form-horizontal" action="/uploadfile/{{poi._id}}" method="POST" enctype="multipart/form-data">
-            <div class="uk-margin">
-                <label class="uk-form-label" for="form-horizontal-text">Select Image</label>
-                <div class="uk-form-controls">
-                    <input type="file" class="uk-input" name="imagefile" accept="image/png, image/jpeg">
-                </div>
-            </div>
-            <div>
-                <p uk-margin>
-                    <input type="submit" value="Upload" class="uk-button uk-button-default">
-                </p>
-            </div>
-        </form>
+    <div class="uk-width-expand@m">
+        <div class="uk-margin uk-width-2xlarge uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+            <h3 class="uk-card-title uk-text-center">Upload an Image of {{poi.name}}</h3>
+        <div>
+            {{> upload }}
+        </div>
     </div>
-    {{> error}}
-</div>
+    </div>
 {{> error}}
