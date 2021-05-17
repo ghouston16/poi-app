@@ -71,8 +71,9 @@ const Gallery = {
   deleteImage: {
     handler: async function(request, h) {
       try {
-        await ImageStore.deleteImage(request.params.id);
-        return h.redirect('/');
+       // const image = await Image.findById(request.params._id)
+        await ImageStore.deleteImage(request.params._id);
+        return h.redirect('/report');
       } catch (err) {
         console.log(err);
       }

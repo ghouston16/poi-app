@@ -43,6 +43,8 @@ const ImageStore = {
 
   deleteImage: async function(id) {
     await cloudinary.v2.uploader.destroy(id, {});
+    await Image.deleteOne({id: id});
   },
 };
+
 module.exports = ImageStore;
