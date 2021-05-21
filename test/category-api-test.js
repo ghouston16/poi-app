@@ -10,7 +10,7 @@ suite('Category API tests', function () {
   let categories = fixtures.categories;
   let newCategory = fixtures.newCategory;
 
-  const poiService = new PoiService('http://localhost:3000');
+  const poiService = new PoiService('http://localhost:4000');
 
   setup(async function () {
     await poiService.deleteAllCategories();
