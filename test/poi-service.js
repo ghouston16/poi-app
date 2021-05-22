@@ -28,6 +28,7 @@ class PoiService {
   async createUser(newUser) {
     try {
       const response = await axios.post(this.baseUrl + '/api/users', newUser);
+      console.log(response);
       return response.data;
     } catch (e) {
       return null;
@@ -100,6 +101,7 @@ class PoiService {
   async makePoi(id, poi) {
     try {
       const response = await axios.post(this.baseUrl + '/api/categories/' + id + '/pois', poi);
+      console.log(poi);
       return response.data;
     } catch (e) {
       return null;
@@ -108,9 +110,11 @@ class PoiService {
 
   async getPois(id) {
     try {
-      const response = await axios.get(this.baseUrl + '/api/categories/' + id + '/pois');
+      const response = await axios.get(this.baseUrl + '/api/pois');
+      console.log(response);
       return response.data;
     } catch (e) {
+      console.log(e);
       return null;
     }
   }
@@ -123,6 +127,21 @@ class PoiService {
       return null;
     }
   }
+  async authenticate(user) {
+    try {
+      const response = await axios.post(this.baseUrl + "/api/users/authenticate", user);
+      axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token;
+      return response.data;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+  async clearAuth(user) {
+    axios.defaults.headers.common["Authorization"] = "";
+  }
 }
+
+
 
 module.exports = PoiService;

@@ -12,12 +12,6 @@
       "lastName": "Simpson",
       "email": "marge@simpson.com",
       "password": "$2a$10$D3TWK8MSAh63Lhk4gIFSJ.ekM368J88qJRUYSbuBfzffex6B0dFwK"
-    },
-    "bart": {
-      "firstName": "Bart",
-      "lastName": "Simpson",
-      "email": "bart@simpson.com",
-      "password": "$2a$10$uqnPlgyVjBEOtcgMhn/WRO3FwW4T9gX36tTB4RqpGeB/LkCR3YQuO"
     }
   },
   "categories": {
@@ -60,16 +54,6 @@
       "lat": "53.1289° N",
       "long": "9.7197° W",
       "image": "https://res.cloudinary.com/dbx7nenkt/image/upload/v1616449125/inismor1_n7chzk.jpg"
-    },
-    "four": {
-      "name": "Howth",
-      "description":  "Tombolo on the East Coast of Ireland. Home to Howth Head LightHouse",
-      "creator": "->users.bart",
-      "category": "->categories.east",
-      "lat": "53.3786° N",
-      "long": "6.0570° W",
-      "image": "https://res.cloudinary.com/dbx7nenkt/image/upload/v1616454395/howth1_hktnjn.jpg"
     }
-
   }
 }

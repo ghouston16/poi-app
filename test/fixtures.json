@@ -21,7 +21,8 @@
     "firstName": "Bart",
     "lastName": "Simpson",
     "email": "bart@simpson.com",
-    "password": "secret"
+    "password": "secret",
+    "isAdmin": false
   },
   "categories": [
     {
@@ -74,8 +75,7 @@
     "creator": "->users.bart",
     "category": "->categories.east",
     "lat": "53.3786° N",
-    "long": "6.0570° W",
-    "image": "https://res.cloudinary.com/dbx7nenkt/image/upload/v1616454395/howth1_hktnjn.jpg"
+    "long": "6.0570° W"
   }
 
 }
