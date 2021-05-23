@@ -35,6 +35,22 @@ const Users = {
       }
     }
   },
+  findByEmail: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function(request, h) {
+      try {
+        const user = await User.findOne({ email: request.params.email });
+        if (!user) {
+          return Boom.notFound('No User with this id');
+        }
+        return user;
+      } catch (err) {
+        return Boom.notFound('No User with this id');
+      }
+    }
+  },
 
   create: {
     auth: false,
@@ -80,13 +96,59 @@ const Users = {
       strategy: "jwt",
     },
     handler: async function(request, h) {
-      const user = await User.deleteOne({ _id: request.params.id });
+      const userId = await utils.getUserIdFromRequest(request);
+      //console.log(userId);
+      const user = await User.deleteOne({ _id: userId });
       if (user) {
         return { success: true };
       }
       return Boom.notFound('id not found');
     }
   },
+  getUserId: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function(request, h) {
+      const user = await utils.getUserIdFromRequest({request });
+      if (user) {
+        return user;
+      }
+      return Boom.notFound('id not found');
+    }
+  },
+  update: {
+    auth: {
+      strategy: "jwt",
+    },
+    validate: {
+      payload: {
+        firstName: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
+        lastName: Joi.string().required().regex(/^[A-Z]/).min(3),
+        email: Joi.string().email().required(),
+        password: Joi.string().required().min(5),
+      },
+    },
+    handler: async function (request, h) {
+      const userEdit = request.payload;
+      const userId = await utils.getUserIdFromRequest(request);
+      const storedPassword = userEdit.password;
+      const hash = await bcrypt.hash(storedPassword, saltRounds);
+      //console.log(userId);
+      const user = await User.findById(userId);
+      user.firstName = userEdit.firstName;
+      user.lastName = userEdit.lastName;
+      user.email = userEdit.email;
+      user.password = hash;
+      user._id = userId;
+      await user.save();
+      if (user) {
+        return { success: true };
+      }
+      return Boom.notFound("id not found");
+    },
+  },
+
 
   authenticate: {
       auth: false,

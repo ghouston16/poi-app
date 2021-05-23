@@ -34,7 +34,6 @@ module.exports = [
   { method: 'GET', path: '/update-category/{_id}', config: Categories.showCat },
   { method: 'POST', path: '/update-category/{_id}', config: Categories.editCategory },
 
-
   //{ method: 'GET', path: '/deleteimage/{id}', config: Gallery.deleteImage },
   {
     method: "GET",
