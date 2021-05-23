@@ -2,7 +2,11 @@
 
 const User = require('../models/user');
 const Boom = require('@hapi/boom');
+const Joi = require("@hapi/joi");
 const utils = require('./utils.js');
+const bcrypt = require("bcrypt");          // ADDED
+const saltRounds = 10;                     // ADDED
+
 
 const Users = {
   find: {
@@ -34,14 +38,31 @@ const Users = {
 
   create: {
     auth: false,
-    handler: async function(request, h) {
-      const newUser = new User(request.payload);
-      const user = await newUser.save();
-      if (user) {
-        return h.response(user).code(201);
+    validate: {
+      payload: {
+        firstName: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
+        lastName: Joi.string().required().regex(/^[A-Z]/).min(3),
+        email: Joi.string().email().required(),
+        password: Joi.string().required().min(5),
+      },
+    },
+      handler: async function(request, h) {
+        const newUser = new User(request.payload);
+        const storedPassword = newUser.password;
+        const hash = await bcrypt.hash(storedPassword, saltRounds);
+        const saveUser = new User({
+          firstName: newUser.firstName,
+          lastName: newUser.lastName,
+          email: newUser.email,
+          password: hash,
+        });
+        const user = await saveUser.save();
+        if (user) {
+          return h.response(user).code(201);
+        }
+        return Boom.badImplementation('error creating user');
       }
-      return Boom.badImplementation('error creating user');
-    }
+  //  }
   },
 
   deleteAll: {
@@ -68,23 +89,31 @@ const Users = {
   },
 
   authenticate: {
-    auth: false,
-    handler: async function (request, h) {
-      try {
-        const user = await User.findOne({ email: request.payload.email });
-        if (!user) {
-          return Boom.unauthorized("User not found");
-        } else if (user.password !== request.payload.password) {
-          return Boom.unauthorized("Invalid password");
-        } else {
-          const token = utils.createToken(user);
-          return h.response({ success: true, token: token }).code(201);
+      auth: false,
+      validate: {
+        payload: {
+          email: Joi.string().email().required(),
+          password: Joi.string().required().min(5),
+        },
+      },
+      handler: async function(request, h) {
+        try {
+          const user = await User.findOne({ email: request.payload.email });
+          const password = request.payload.password;
+          const isMatch = await bcrypt.compare(password, user.password);
+          if (!user) {
+            return Boom.unauthorized("User not found");
+          } else if (!isMatch) {
+            return Boom.unauthorized("Invalid password");
+          } else {
+            const token = utils.createToken(user);
+            return h.response({ success: true, token: token }).code(201);
+          }
+        } catch (err) {
+          return Boom.notFound("internal db failure");
         }
-      } catch (err) {
-        return Boom.notFound("internal db failure");
-      }
+      },
     },
-  },
 };
 
 module.exports = Users;

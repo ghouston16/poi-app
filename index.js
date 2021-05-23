@@ -29,10 +29,10 @@ const credentials = {
 };
 
 async function init() {
-  await server.register(require('hapi-auth-jwt2'));
   await server.register(Inert);
   await server.register(Vision);
   await server.register(Cookie);
+  await server.register(require('hapi-auth-jwt2'));
   ImageStore.configure(credentials);
   server.validator(require("@hapi/joi"));
   server.views({
