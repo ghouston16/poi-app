@@ -15,12 +15,13 @@ module.exports = [
   { method: 'POST', path: '/api/users', config: Users.create },
   { method: 'DELETE', path: '/api/users/{id}', config: Users.deleteOne },
   { method: 'DELETE', path: '/api/users', config: Users.deleteAll },
-   { method: "PUT", path: "/api/users/{id}", config: Users.update },
+  { method: "PUT", path: "/api/users/{id}", config: Users.update },
   //{ method: "POST", path: "/api/users/authenticate", config: Users.authenticate },
   { method: 'POST', path: '/api/users/authenticate', config: Users.authenticate },
 
   { method: 'GET', path: '/api/pois', config: Pois.findAll },
   { method: 'GET', path: '/api/pois/{id}', config: Pois.findById },
+  { method: "PUT", path: "/api/pois/{id}", config: Pois.updateOne },
 
   { method: 'GET', path: '/api/categories/{id}/pois', config: Pois.findByCategory },
 
