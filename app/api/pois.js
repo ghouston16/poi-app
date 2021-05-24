@@ -21,7 +21,8 @@ const Pois = {
       strategy: "jwt",
     },
     handler: async function(request, h) {
-      const pois = await Poi.find({ category: request.params.id });
+      console.log(request.payload);
+      const pois = await Poi.find({ category: request.params.id }).populate("category").populate("creator");
       console.log(pois);
       return pois;
     }

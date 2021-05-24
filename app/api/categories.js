@@ -5,7 +5,9 @@ const Boom = require('@hapi/boom');
 
 const Categories = {
   find: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function(request, h) {
       const categories = await Category.find();
       return categories;
