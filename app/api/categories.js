@@ -42,6 +42,39 @@ const Categories = {
       return Boom.badImplementation('error creating category');
     }
   },
+  updateOne: {
+    auth: {
+      strategy: "jwt",
+    },
+    /*
+    validate: {
+      payload: {
+        name: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
+        description: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/).max(240),
+        category: Joi.string().not().required(),
+        lat: Joi.string().required().max(10),
+        long: Joi.string().required().max(10),
+        image: Joi.string().not().required()
+      },
+    },
+
+     */
+    handler: async function(request, h) {
+      try {
+        const categoryEdit = request.payload;
+        const category = await Category.findById(request.payload._id);
+        console.log(category);
+        category.name = categoryEdit.name;
+        console.log("Updated" + category);
+        await category.save();
+        if (category) {
+          return { success: true };
+        }
+      } catch(err){
+        return Boom.notFound("id not found");
+      }
+    },
+  },
   deleteAll: {
     auth: {
       strategy: "jwt",

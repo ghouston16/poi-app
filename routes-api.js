@@ -8,6 +8,7 @@ module.exports = [
   { method: 'POST', path: '/api/categories', config: Categories.create },
   { method: 'DELETE', path: '/api/categories/{id}', config: Categories.deleteOne },
   { method: 'DELETE', path: '/api/categories', config: Categories.deleteAll },
+   { method: "PUT", path: "/api/categories/{id}", config: Categories.updateOne },
 
   { method: 'GET', path: '/api/users', config: Users.find },
   { method: 'GET', path: '/api/users/{id}', config: Users.findOne },

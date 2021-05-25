@@ -41,6 +41,7 @@ const Users = {
     },
     handler: async function(request, h) {
       try {
+        console.log(request.params.email);
         const user = await User.findOne({ email: request.params.email });
         if (!user) {
           return Boom.notFound('No User with this id');
