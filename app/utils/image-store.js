@@ -17,13 +17,15 @@ const ImageStore = {
   },
 
   getAllImages: async function(poi) {
-    const result = await cloudinary.v2.api.resources({poi: poi});
+    console.log(poi);
+    const result = await cloudinary.v2.api.resources_by_tag(poi._id);
     return result.resources;
   },
 
   uploadImage: async function(imagefile, poi) {
     await writeFile('./public/temp.img', imagefile);
     await cloudinary.uploader.upload('./public/temp.img', async function (image) {
+    await cloudinary.v2.uploader.add_tag(poi._id, [image.public_id]);
       //const image = console.log();
       console.log("** File Upload");
      // if (err) { console.warn(err); }

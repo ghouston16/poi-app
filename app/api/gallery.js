@@ -11,18 +11,14 @@ const Gallery = {
       try {
        // const allImages = await ImageStore.getAllImages();
         const rawPoi = request.params._id;
+        console.log(rawPoi);
         const poi = await Poi.findOne({
           _id: rawPoi
         });
-        const Images = await ImageStore.getAllImages(poi);
-
-        console.log(Images);
-       // const poiImages = await ImageStore.getAllImages()
-        return h.view('gallery', {
-          title: 'POI Gallery',
-          images: Images,
-          poi: poi.name
-        });
+        const Images = await ImageStore.getAllImages();
+        if (Images) {
+          return { success: true };
+        }
       } catch (err) {
         console.log(err);
       }
@@ -38,7 +34,7 @@ const Gallery = {
           _id: rawPoi
         });
         await ImageStore.uploadImage(request.payload.imagefile, poi);
-        // const Images = await Image.find({poi: poi}).lean();
+       // const Images = await Image.find({poi: poi}).lean();
         const Images = await ImageStore.getAllImages(poi);
         if (Object.keys(file).length > 0) {
           //  await image.url;
@@ -50,12 +46,10 @@ const Gallery = {
           poi.long = poi.long;
           poi.images = Images;
           poi.save();
-          return h.redirect('/gallery/' + poi._id);
+          if (poi) {
+            return { success: true };
+          }
         }
-        return h.view('gallery', {
-          title: 'Cloudinary Gallery',
-          error: 'No file selected'
-        });
       } catch (err) {
         console.log(err);
       }
@@ -72,8 +66,10 @@ const Gallery = {
     handler: async function(request, h) {
       try {
        // const image = await Image.findById(request.params._id)
-        await ImageStore.deleteImage(request.params._id);
-        return h.redirect('/report');
+        const images = await ImageStore.deleteImage(request.params._id);
+        if (images) {
+          return { success: true };
+        }
       } catch (err) {
         console.log(err);
       }
