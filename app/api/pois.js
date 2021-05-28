@@ -33,7 +33,7 @@ const Pois = {
       strategy: "jwt",
     },
     handler: async function(request, h) {
-      const poi = await Poi.findById(request.params.id);
+      const poi = await Poi.findById(request.params.id).populate("creator").populate("category");
       console.log(poi);
       return poi;
     }

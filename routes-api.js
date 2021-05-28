@@ -1,6 +1,7 @@
 const Categories = require('./app/api/categories');
 const Users = require('./app/api/users');
 const Pois = require('./app/api/pois');
+const Gallery = require('./app/api/gallery');
 
 module.exports = [
   { method: 'GET', path: '/api/categories', config: Categories.find },
@@ -28,5 +29,8 @@ module.exports = [
 
   { method: 'POST', path: '/api/categories/{id}/pois', config: Pois.makePoi },
   { method: 'DELETE', path: '/api/pois', config: Pois.deleteAll },
-  { method: 'DELETE', path: '/api/pois/{id}', config: Pois.deleteOne }
+  { method: 'DELETE', path: '/api/pois/{id}', config: Pois.deleteOne },
+
+  { method: 'GET', path: '/api/gallery/{_id}', config: Gallery.getImages },
+  { method: 'POST', path: '/api/uploadfile/{_id}', config: Gallery.uploadFile },
 ];

@@ -6,7 +6,11 @@ const Poi = require("../models/poi");
 
 
 const Gallery = {
-  index: {
+  // Tested on Postman
+  // TODO: Write Test
+  // TODO: Add Auth
+  getImages: {
+    auth: false,
     handler: async function(request, h) {
       try {
        // const allImages = await ImageStore.getAllImages();
@@ -15,19 +19,19 @@ const Gallery = {
         const poi = await Poi.findOne({
           _id: rawPoi
         });
-        const Images = await ImageStore.getAllImages();
-        if (Images) {
-          return { success: true };
-        }
+        const Images = await ImageStore.getAllImages(poi);
+          return Images;
       } catch (err) {
         console.log(err);
       }
     }
   },
+
   uploadFile: {
+    auth: false,
     handler: async function(request, h) {
       try {
-        const file = request.payload.imagefile;
+        const file = request.payload;
         //const data = request.payload;
         const rawPoi = request.params._id;
         const poi = await Poi.findOne({
