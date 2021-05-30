@@ -22,7 +22,7 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
   if (!isMatch) {
     throw Boom.unauthorized('Password mismatch');
   }
-  return this;
+  return true;
 };
 
 module.exports = Mongoose.model("User", userSchema);

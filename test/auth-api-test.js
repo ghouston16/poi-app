@@ -17,9 +17,9 @@ suite("Authentication API tests", function () {
 
   test("authenticate", async function () {
     const returnedUser = await poiService.createUser(newUser);
-    console.log(returnedUser)
+   // console.log(returnedUser)
     const response = await poiService.authenticate(returnedUser);
-    console.log(response);
+   // console.log(response);
     assert(response.success);
     assert.isDefined(response.token);
   });

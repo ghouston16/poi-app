@@ -129,7 +129,10 @@ class PoiService {
   }
   async authenticate(user) {
     try {
+
       const response = await axios.post(this.baseUrl + "/api/users/authenticate", user);
+     // const checkUser = await User.find({ email: user.email})
+     // const response = await axios.post(this.baseUrl + "/api/users/authenticate", checkUser.email, user.password);
       axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token;
       return response.data;
     } catch (e) {

@@ -2,6 +2,7 @@
 
 const Category = require('../models/category');
 const Boom = require('@hapi/boom');
+const Joi = require('@hapi/joi');
 
 const Categories = {
   find: {
@@ -33,6 +34,11 @@ const Categories = {
     auth: {
       strategy: "jwt",
     },
+    validate: {
+      payload: {
+        name: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
+      },
+    },
     handler: async function(request, h) {
       const newCategory = new Category(request.payload);
       const category = await newCategory.save();
@@ -46,19 +52,20 @@ const Categories = {
     auth: {
       strategy: "jwt",
     },
-    /*
+
     validate: {
       payload: {
         name: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
+        /*
         description: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/).max(240),
         category: Joi.string().not().required(),
         lat: Joi.string().required().max(10),
         long: Joi.string().required().max(10),
         image: Joi.string().not().required()
+
+         */
       },
     },
-
-     */
     handler: async function(request, h) {
       try {
         const categoryEdit = request.payload;

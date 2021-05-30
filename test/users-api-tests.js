@@ -24,14 +24,14 @@ suite("User API tests", function () {
 
   test("create a user", async function () {
     const returnedUser = await poiService.createUser(newUser);
-    assert(_.some([returnedUser], newUser), "returnedUser must be a superset of newUser");
+    assert.equal(returnedUser.name, newUser.name, "returnedUser must be a superset of newUser");
     assert.isDefined(returnedUser._id);
   });
 
   test("get user", async function () {
     const u1 = await poiService.createUser(newUser);
     const u2 = await poiService.getUser(u1._id);
-    assert.deepEqual(u1, u2);
+    assert.equal(u1._id, u2._id);
   });
 
   test("get invalid user", async function () {

@@ -4,9 +4,9 @@ const User = require('../models/user');
 const Boom = require('@hapi/boom');
 const Joi = require("@hapi/joi");
 const utils = require('./utils.js');
-//const bcrypt = require("bcryptjs");
-// const bcrypt = require("bcryptjs")
-//const saltRounds = 10;                     // ADDED
+const bcrypt = require("bcrypt");
+//const bcrypt = require("bcryptjs")
+const saltRounds = 10;                     // ADDED
 const Users = {
   find: {
     auth: {
@@ -35,9 +35,7 @@ const Users = {
     }
   },
   findByEmail: {
-    auth: {
-      strategy: "jwt",
-    },
+    auth: false,
     handler: async function(request, h) {
       try {
         console.log(request.params.email);
@@ -53,22 +51,32 @@ const Users = {
   },
 
   create: {
+    auth: false,
     validate: {
       payload: {
-        firstName: Joi.string().required(),
-        lastName: Joi.string().required(),//.regex(/^[A-Z]/).min(3),
+        firstName: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
+        lastName: Joi.string().required().regex(/^[A-Z]/).min(3),
         email: Joi.string().email().required(),
         password: Joi.string().required().min(5),
       },
     },
-    handler: async function (request, h) {
+    handler: async function(request, h) {
       const newUser = new User(request.payload);
-      const user = await newUser.save();
+      const storedPassword = newUser.password;
+      const hash = await bcrypt.hash(storedPassword, saltRounds);
+      const saveUser = new User({
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        email: newUser.email,
+        password: hash,
+      });
+      const user = await saveUser.save();
       if (user) {
         return h.response(user).code(201);
       }
-      return Boom.badImplementation("error creating user");
-    },
+      return Boom.badImplementation('error creating user');
+    }
+    //  }
   },
 
 
@@ -123,14 +131,14 @@ const Users = {
     handler: async function (request, h) {
       const userEdit = request.payload;
       const userId = await utils.getUserIdFromRequest(request);
-     // const storedPassword = userEdit.password;
-    //  const hash = await bcrypt.hash(storedPassword, saltRounds);
+      const storedPassword = userEdit.password;
+      const hash = await bcrypt.hash(storedPassword, saltRounds);
       //console.log(userId);
       const user = await User.findById(userId);
       user.firstName = userEdit.firstName;
       user.lastName = userEdit.lastName;
       user.email = userEdit.email;
-      user.password = userEdit.password;
+      user.password = hash;
       user._id = userId;
       await user.save();
       if (user) {
@@ -141,25 +149,31 @@ const Users = {
   },
 
   authenticate: {
-      auth: false,
-      handler: async function(request, h) {
-        try {
-          const user = await User.findOne({ email: request.payload.email });
-          const password = user.password;
-         // const isMatch =  await bcrypt.compare(password, request.payload.password );
-          if (!user) {
-            return Boom.unauthorized("User not found");
-          } else if (password !== request.payload.password) {
-            return Boom.unauthorized("Invalid password");
-          } else {
-            const token = utils.createToken(user);
-            return h.response({ success: true, token: token }).code(201);
-          }
-        } catch (err) {
-          return Boom.notFound("internal db failure");
-        }
+    auth: false,
+    validate: {
+      payload: {
+        email: Joi.string().email().required(),
+        password: Joi.string().required().min(5),
       },
     },
+    handler: async function(request, h) {
+      try {
+        const user = await User.findOne({ email: request.payload.email });
+        const password = request.payload.password;
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!user) {
+          return Boom.unauthorized("User not found");
+        } else if (!isMatch) {
+          return Boom.unauthorized("Invalid password");
+        } else {
+          const token = utils.createToken(user);
+          return h.response({ success: true, token: token }).code(201);
+        }
+      } catch (err) {
+        return Boom.notFound("internal db failure");
+      }
+    },
+  },
 };
 
 module.exports = Users;

@@ -21,8 +21,7 @@
     "firstName": "Bart",
     "lastName": "Simpson",
     "email": "bart@simpson.com",
-    "password": "secret",
-    "isAdmin": false
+    "password": "Secret"
   },
   "categories": [
     {
