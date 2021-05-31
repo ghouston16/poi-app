@@ -106,7 +106,7 @@ const Pois = {
       },
     },
 
- 
+
     handler: async function(request, h) {
       try {
         const poiEdit = request.payload;
