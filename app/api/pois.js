@@ -49,14 +49,15 @@ const Pois = {
         category: Joi.string().required(),
         lat: Joi.string().required(),
         long: Joi.string().required(),
-        image: Joi.string(),
+        image: Joi.string().optional(),
        // creator: Joi.string().required()
       },
     },
 
     handler: async function (request, h) {
-      const userId = utils.getUserIdFromRequest(request);
+      const userId = await utils.getUserIdFromRequest(request);
       let poi = new Poi(request.payload);
+      console.log(poi);
       const category = await Category.findOne({ _id: request.params.id });
       console.log(category);
       if (!category) {
