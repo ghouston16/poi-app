@@ -5,7 +5,6 @@ const Boom = require('@hapi/boom');
 const Joi = require("@hapi/joi");
 const utils = require('./utils.js');
 const bcrypt = require("bcrypt");
-//const bcrypt = require("bcryptjs")
 const saltRounds = 10;                     // ADDED
 const Users = {
   find: {
@@ -96,7 +95,6 @@ const Users = {
     },
     handler: async function(request, h) {
       const userId = await utils.getUserIdFromRequest(request);
-      //console.log(userId);
       const user = await User.deleteOne({ _id: userId });
       if (user) {
         return { success: true };

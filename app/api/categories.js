@@ -55,15 +55,16 @@ const Categories = {
     auth: {
       strategy: "jwt",
     },
-
+ /*
     validate: {
       payload: {
-        /*
+
         name: Joi.string().required(),  //.regex(/^[A-Z][a-z]$/),
 
-         */
+
       },
     },
+  */
     handler: async function(request, h) {
       try {
         const categoryEdit = request.payload;
