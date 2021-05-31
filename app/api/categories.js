@@ -43,6 +43,7 @@ const Categories = {
      */
     handler: async function(request, h) {
       const newCategory = new Category(request.payload);
+      console.log(newCategory)
       const category = await newCategory.save();
       if (category) {
         return h.response(category).code(201);

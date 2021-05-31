@@ -42,7 +42,6 @@ const Pois = {
     auth: {
       strategy: "jwt",
     },
-    /*
    validate: {
       payload: {
         name: Joi.string().required(), //.regex(/^[A-Z][a-z]{2,}$/),
@@ -55,7 +54,6 @@ const Pois = {
       },
     },
 
-     */
     handler: async function (request, h) {
       const userId = utils.getUserIdFromRequest(request);
       let poi = new Poi(request.payload);
@@ -94,7 +92,7 @@ const Pois = {
     auth: {
       strategy: "jwt",
     },
-/*
+
     validate: {
       payload: {
         name: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
@@ -106,7 +104,7 @@ const Pois = {
       },
     },
 
- */
+
     handler: async function(request, h) {
       try {
         const poiEdit = request.payload;
