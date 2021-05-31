@@ -150,12 +150,6 @@ const Users = {
 
   authenticate: {
     auth: false,
-    validate: {
-      payload: {
-        email: Joi.string().email().required(),
-        password: Joi.string().required().min(5),
-      },
-    },
     handler: async function(request, h) {
       try {
         const user = await User.findOne({ email: request.payload.email });

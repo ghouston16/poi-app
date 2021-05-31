@@ -34,11 +34,13 @@ const Categories = {
     auth: {
       strategy: "jwt",
     },
+    /*
     validate: {
       payload: {
         name: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
       },
     },
+     */
     handler: async function(request, h) {
       const newCategory = new Category(request.payload);
       const category = await newCategory.save();
@@ -55,13 +57,8 @@ const Categories = {
 
     validate: {
       payload: {
-        name: Joi.string().max(10).required().regex(/^[A-Z][a-z]$/),
         /*
-        description: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/).max(240),
-        category: Joi.string().not().required(),
-        lat: Joi.string().required().max(10),
-        long: Joi.string().required().max(10),
-        image: Joi.string().not().required()
+        name: Joi.string().required(),  //.regex(/^[A-Z][a-z]$/),
 
          */
       },
