@@ -75,7 +75,6 @@ const Users = {
       }
       return Boom.badImplementation('error creating user');
     }
-    //  }
   },
 
 
