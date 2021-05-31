@@ -7,7 +7,7 @@ const Vision = require("@hapi/vision");
 const Handlebars = require("handlebars");
 const Cookie = require("@hapi/cookie");
 const Joi = require("@hapi/joi");
-const cloudinary = require("cloudinary");
+//const cloudinary = require("cloudinary");
 const utils = require("./app/api/utils.js");
 
 const server = Hapi.server({
