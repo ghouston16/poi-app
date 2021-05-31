@@ -55,7 +55,7 @@ const Categories = {
 
     validate: {
       payload: {
-        name: Joi.string().required().regex(/^[A-Z][a-z]$/).max(10),
+        name: Joi.string().max(10).required().regex(/^[A-Z][a-z]$/),
         /*
         description: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/).max(240),
         category: Joi.string().not().required(),
