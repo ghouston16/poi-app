@@ -42,6 +42,7 @@ const Pois = {
     auth: {
       strategy: "jwt",
     },
+    /*
    validate: {
       payload: {
         name: Joi.string().required(), //.regex(/^[A-Z][a-z]{2,}$/),
@@ -49,15 +50,14 @@ const Pois = {
         category: Joi.string().required(),
         lat: Joi.string().required(),
         long: Joi.string().required(),
-        image: Joi.string().optional(),
+        image: Joi.string().required(false),
        // creator: Joi.string().required()
       },
     },
-
+    */
     handler: async function (request, h) {
-      const userId = await utils.getUserIdFromRequest(request);
+      const userId = utils.getUserIdFromRequest(request);
       let poi = new Poi(request.payload);
-      console.log(poi);
       const category = await Category.findOne({ _id: request.params.id });
       console.log(category);
       if (!category) {
@@ -93,7 +93,7 @@ const Pois = {
     auth: {
       strategy: "jwt",
     },
-
+/*
     validate: {
       payload: {
         name: Joi.string().required().regex(/^[A-Z][a-z]{2,}$/),
@@ -105,7 +105,7 @@ const Pois = {
       },
     },
 
-
+ */
     handler: async function(request, h) {
       try {
         const poiEdit = request.payload;
