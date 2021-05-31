@@ -7,7 +7,7 @@ const Vision = require("@hapi/vision");
 const Handlebars = require("handlebars");
 const Cookie = require("@hapi/cookie");
 const Joi = require("@hapi/joi");
-//const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary");
 const utils = require("./app/api/utils.js");
 
 const server = Hapi.server({
@@ -33,7 +33,7 @@ async function init() {
   await server.register(Vision);
   await server.register(Cookie);
   await server.register(require('hapi-auth-jwt2'));
-  ImageStore.configure(credentials);
+ // ImageStore.configure(credentials);
   server.validator(require("@hapi/joi"));
   server.views({
     engines: {

@@ -1,6 +1,6 @@
-'use strict';
-
-const ImageStore = require('../utils/image-store');
+//'use strict';
+/*
+//const ImageStore = require('../utils/image-store');
 const Image = require('../models/image');
 const Poi = require("../models/poi");
 
@@ -82,3 +82,4 @@ const Gallery = {
 };
 
 module.exports = Gallery;
+*/

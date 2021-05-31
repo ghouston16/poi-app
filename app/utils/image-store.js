@@ -1,4 +1,5 @@
-'use strict';
+//'use strict';
+/*
 const cloudinary = require('cloudinary');
 const fs = require('fs');
 const util = require('util');
@@ -50,3 +51,8 @@ const ImageStore = {
 };
 
 module.exports = ImageStore;
+
+
+
+
+ */
